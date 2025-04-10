@@ -20,7 +20,7 @@ resource "aws_subnet" "project_0_subnet" {
     }
 }
 
-resource "aws_internet_gateway " "project_0_igw" {
+resource "aws_internet_gateway" "project_0_igw" {
   vpc_id = aws_vpc.project_0_vpc.id
   tags = {
     Name = "project-0-igw"
