@@ -37,3 +37,42 @@ resource "aws_route_table" "project_0_route_table" {
         Name = "project-0-route-table"
     }
 }
+
+resource "aws_route_table_association" "a" {
+  count = 2
+  subnet_id = aws_subnet.project_0_subnet[count.index].id
+  route_table_id = aws_route_table.project_0_route_table.id
+}
+
+resource "aws_security_group" "project_0_cluster_sg" {
+    vpc_id = aws_vpc.project_0_vpc.id
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    tags = {
+        Name = "project-0-cluster-sg"
+    }
+}
+
+resource "aws_security_group" "project_0_node_sg" {
+    vpc_id = aws_vpc.project_0_vpc.id
+    ingress {
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    tags = {
+        Name = "project-0-node-sg"
+    }
+}
