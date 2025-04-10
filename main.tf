@@ -146,3 +146,18 @@ resource "aws_iam_role" "project_0_node_group_role" {
 }
 EOF
 }
+
+resource "aws_iam_role_policy_attachment" "project_0_node_group_role_policy" {
+  role       = aws_iam_role.project_0_node_group_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+}
+
+resource "aws_iam_role_policy_attachment" "project_0_node_group_cni_policy" {
+  role       = aws_iam_role.project_0_node_group_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+}
+
+resource "aws_iam_role_policy_attachment" "project_0_node_group_registry_policy" {
+  role       = aws_iam_role.project_0_node_group_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
